@@ -1,0 +1,65 @@
+<canvas id="myCanvas" width="250" height="250"></canvas>
+<script type="text/javascript">
+// requestAnimationFrame Shim
+(function() {
+  var requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame ||
+                              window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
+  window.requestAnimationFrame = requestAnimationFrame;
+})();
+ 
+
+var canvas = document.getElementById('myCanvas');
+ var context = canvas.getContext('2d');
+ var x = canvas.width / 2;
+ var y = canvas.height / 2;
+ var radius = 75;
+ var endPercent = 101;
+ var curPerc = 0;
+ var counterClockwise = false;
+ var circ = Math.PI * 2;
+ var quart = Math.PI / 2;
+
+ context.lineWidth = 10;
+ context.strokeStyle = '#ad2323';
+ context.shadowOffsetX = 0;
+ context.shadowOffsetY = 0;
+
+
+ function animate(current) {
+    context.clearRect(0, 0, canvas.width, canvas.height);
+
+     //context text
+	context.font="20px Georgia";
+	context.fillText(parseInt(current*100)+"%",90,130);
+
+	context.font="30px Verdana";
+	// Create gradient
+	// var gradient=context.createLinearGradient(0,0,canvas.width,0);
+	// gradient.addColorStop("0","magenta");
+	// gradient.addColorStop("0.5","blue");
+	// gradient.addColorStop("1.0","red");
+	// Fill with gradient
+	// context.fillStyle=gradient;
+	// context.fillText("Big smile!",10,90);
+
+
+     context.beginPath();
+     context.arc(x, y, radius, -(quart), ((circ) * current) - quart, false);
+     context.stroke();
+     curPerc++;
+     if (curPerc < endPercent) {
+         requestAnimationFrame(function () {
+             animate(curPerc / 100)
+         });
+     }
+ }
+
+ animate();
+ </script>
+ <style>
+   body {
+       margin: 0px;
+       padding: 0px;
+       background: #f1ecec;
+   }
+ </style>

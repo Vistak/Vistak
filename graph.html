@@ -1,0 +1,61 @@
+<body>
+</body>
+<script type="text/javascript">
+
+	var SVG=function(h,w)
+	{
+		var NS="http://www.w3.org/2000/svg";
+		var svg=document.createElementNS(NS,"svg");
+		svg.width=w;
+		svg.height=h;
+		return svg;
+	}
+		/*var NS="http://www.w3.org/2000/svg";
+		var svg=document.createElementNS(NS,"svg");*/
+	//Calculating Height and Width of Height
+	var bodyWidth = window.innerWidth|| document.documentElement.clientWidth|| document.body.clientWidth;
+	var bodyHeight = window.innerHeight|| document.documentElement.clientHeight|| document.body.clientHeight;
+
+	var graphSVG = SVG(bodyHeight,bodyWidth);
+	var graphPolygon = document.createElementNS(NS,"polygon");
+
+	//Setting Attributes of graphSVG style="fill:lime;stroke:purple;stroke-width:1"
+	/*graphSVG.setAttribute("height", "210");
+	graphSVG.setAttribute("width", "500");
+
+	graphSVG.appendChild(graphPolygon);
+	graphPolygon.setAttribute("points", "200,10 250,190 160,210");
+	graphPolygon.setAttribute("style", "fill:lime;stroke:purple;stroke-width:1");
+
+
+	document.body.appendChild(graphSVG);*/
+	/*graphPolygonStyle = graphPolygon.style;
+	graphPolygonStyle.fill = "lime";
+	graphPolygonStyle.stroke = "purple";
+	graphPolygonStyle.strokeWidth = "1";*/
+
+	/*var SVG=function(h,w)
+	{
+		var NS="http://www.w3.org/2000/svg";
+		var svg=document.createElementNS(NS,"svg");
+		svg.width=w;
+		svg.height=h;
+		return svg;
+	}
+	var svg=SVG(200,500);
+	document.body.appendChild(svg);
+	var rect=function(h,w,fill)
+	{
+		var NS="http://www.w3.org/2000/svg";
+		var SVGObj= document.createElementNS(NS,"rect");
+		SVGObj.width.baseVal.value=w;
+		SVGObj.height.baseVal.value=h;
+		SVGObj.setAttribute("height",h);
+		SVGObj.style.fill=fill;
+		return SVGObj;
+	}
+	var r= rect(100,100,"blue");
+	svg.appendChild(r);*/
+
+	console.log(svg);
+</script>

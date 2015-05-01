@@ -1,0 +1,47 @@
+<html>
+<script>
+var m=0;
+var value = 8;
+for (var i = 0; i < 5; i++) 
+{
+	for (var j = 0; j < 5; j++) 
+	{
+		for (var k = 0; k < 5; k++) 
+		{
+			value = 8;
+			max = i;
+			oi=operatorsString(i);
+			oj=operatorsString(j);
+			ok=operatorsString(k);
+			console.log("8 "+oi+" 8 "+oj+" 8 "+ok+" 8 ");
+			stoke = eval("8"+oi+"8"+oj+"8"+ok+"8");
+			console.log(stoke);
+			m++;
+		}
+	}
+}
+
+function operatorsString(o) 
+{
+	switch(o)
+	{
+		case 0:
+			operatorString = "-";
+		break;
+		case 1:
+			operatorString = "+";
+		break;
+		case 2:
+			operatorString = "%";
+		break;
+		case 3:
+			operatorString = "*";
+		break;
+		case 4:
+			operatorString = "/";
+		break;
+	}
+	return operatorString;
+}
+</script>
+</html>
