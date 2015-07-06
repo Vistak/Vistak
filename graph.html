@@ -3,6 +3,10 @@
 <script type="text/javascript">
 var vistakGraph = function()
 {
+	//Calculating Height and Width of Height
+	var bodyWidth = window.innerWidth|| document.documentElement.clientWidth|| document.body.clientWidth;
+	var bodyHeight = window.innerHeight|| document.documentElement.clientHeight|| document.body.clientHeight;
+
 	var SVG=function(h,w)
 	{
 		var NS="http://www.w3.org/2000/svg";
@@ -30,41 +34,61 @@ var vistakGraph = function()
 		return points;
 	}
 
-	var graphPolygonSetPoints = function(polygonArray)
+	var graphPolygonSetPoints = function(graphPolygon,polygonArray)
 	{
 
 		graphPolygon.setAttribute("points", graphPolygonPoints(polygonArray));
 	}
 
-	//Calculating Height and Width of Height
-	var bodyWidth = window.innerWidth|| document.documentElement.clientWidth|| document.body.clientWidth;
-	var bodyHeight = window.innerHeight|| document.documentElement.clientHeight|| document.body.clientHeight;
+	var createGraph = function(height,width)
+	{
+		// height =  bodyHeight;
+		// width  =  bodyWidth;
 
+		var graphSVG = new SVG(height,width);
+		document.body.appendChild(graphSVG);
 
-	var graphSVG = new SVG(bodyHeight,bodyWidth);
-	document.body.appendChild(graphSVG);
+		var getGraphPolygon = function() {
+			var graphPolygon = new POLYGON();
+			graphSVG.appendChild(graphPolygon);
+			graphPolygon.setAttribute("points", "");
+			var graphPolygonStyle = graphPolygon.style;
+			/** Style Graph Polygon **/
+			graphPolygonStyle.stroke = "rgb(181, 175, 175)";
+			graphPolygonStyle.strokeWidth = "0.5";
+			return graphPolygon;
+		}
 
-	var graphPolygon = new POLYGON();
-	graphSVG.appendChild(graphPolygon);
-
-	// graphPolygon.setAttribute("points", "200,10 250,190 160,210");
-	// graphPolygon.setAttribute("style", "fill:lime;stroke:purple;stroke-width:1");
-	graphPolygon.setAttribute("points", "");
-	var graphPolygonStyle = graphPolygon.style;
-	/** Style Graph Polygon **/
-	graphPolygonStyle.fill = "lime";
-	graphPolygonStyle.stroke = "purple";
-	graphPolygonStyle.strokeWidth = "3";
-
-	var graphArray = [];
-	for (var i = 0; i < 5; i++) {
-		graphArray[i] = [];
-		graphArray[i][0]= i*100;
-		graphArray[i][1]= 0;
+		var setHorizontalLines = function() {
+			for (var i = 0; i < bodyWidth; i+=20) {
+				graphPolygon = getGraphPolygon();
+				graphArray = [[i,0],[i,bodyHeight]];
+				graphPolygonSetPoints(graphPolygon,graphArray);
+			}
+		}
+		var setVerticalLines = function() {
+			for (var i = 0; i < bodyWidth; i+=20) {
+				graphPolygon = getGraphPolygon();
+				graphArray = [[0,i],[bodyWidth,i]];
+				graphPolygonSetPoints(graphPolygon,graphArray);
+			}
+		}
+		setHorizontalLines();
+		setVerticalLines();
+		
+		
 	}
-	graphPolygonSetPoints(graphArray);
-	// console.log(graphPolygon);
+
+	createGraph(bodyHeight,bodyWidth);
 }
+
+var vistakGraph1 = {
+    bodyWidth: window.innerWidth|| document.documentElement.clientWidth|| document.body.clientWidth,
+    bodyHeight : window.innerHeight|| document.documentElement.clientHeight|| document.body.clientHeight,
+    fullName : function(c) {
+       return this.firstName + " " + this.lastName;
+    }
+};
 var graph1 = new vistakGraph();
 	//Setting Attributes of graphSVG style="fill:lime;stroke:purple;stroke-width:1"
 	/*graphSVG.setAttribute("height", "210");
