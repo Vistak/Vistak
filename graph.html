@@ -1,5 +1,5 @@
 <body>
-	<div  id="ls" style="background:black">
+	<div  id="ls" style="background:lightblue">
 		
 	</div>
 </body>
@@ -143,9 +143,10 @@ var vistakGraphObject = {
 			return graphPolygon;
 		}
 
-		var setHorizontalLines = function() {
+		var setHorizontalLines = function(division) {
 			graphPolygon = new Array();
-			for (var i = 0; i < self.bodyWidth; i+=20) {
+			horizontalLineSpaceDivision = parseInt(self.bodyWidth/division);
+			for (var i = 0; i < self.bodyWidth; i+=horizontalLineSpaceDivision) {
 				graphPolygon[i] = getGraphPolygon();
 				graphArray = [[i,0],[i,self.bodyHeight]];
 				self.graphPolygonSetPoints(graphPolygon[i],graphArray);
@@ -161,15 +162,16 @@ var vistakGraphObject = {
 				});
 			}
 		}
-		var setVerticalLines = function() {
-			for (var i = 0; i < self.bodyWidth; i+=20) {
+		var setVerticalLines = function(division) {
+			verticalLineSpaceDivision = parseInt(self.bodyHeight/division);
+			for (var i = 0; i < self.bodyWidth; i+=verticalLineSpaceDivision) {
 				graphPolygon = getGraphPolygon();
 				graphArray = [[0,i],[self.bodyWidth,i]];
 				self.graphPolygonSetPoints(graphPolygon,graphArray);
 			}
 		}
-		setHorizontalLines();
-		setVerticalLines();
+		setHorizontalLines(20);
+		setVerticalLines(30);
 	}
 };
 
