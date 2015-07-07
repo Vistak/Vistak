@@ -1,8 +1,14 @@
-<body id="ls">
-	<div style="">
+<body>
+	<div  id="ls" style="background:black">
 		
 	</div>
 </body>
+<style type="text/css">
+	#ls
+	{
+		height: 400px;
+	}
+</style>
 <script type="text/javascript">
 var vistakGraphFunction = function()
 {
@@ -129,7 +135,7 @@ var vistakGraphObject = {
 		var getGraphPolygon = function() {
 			var graphPolygon = self.POLYGON();
 			graphSVG.appendChild(graphPolygon);
-			graphPolygon.setAttribute("points", "200,10 250,190 160,210");
+			graphPolygon.setAttribute("points", "");
 			var graphPolygonStyle = graphPolygon.style;
 			/** Style Graph Polygon **/
 			graphPolygonStyle.stroke = "rgb(181, 175, 175)";
@@ -146,7 +152,7 @@ var vistakGraphObject = {
 				graphPolygon[i].addEventListener("mouseover",function(){
 					horizontalLineStyle = this.style;
 					horizontalLineStyle.stroke = "rgb(100, 100, 100)";
-					horizontalLineStyle.strokeWidth = "10";
+					horizontalLineStyle.strokeWidth = "5";
 				});
 				graphPolygon[i].addEventListener("mouseout",function(){
 					horizontalLineStyle = this.style;
