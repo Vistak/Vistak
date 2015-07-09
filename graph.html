@@ -1,12 +1,13 @@
 <body>
-	<div  id="ls" style="background:lightblue">
-		
+	<div id="ls" style="background:lightblue">
+	</div>
+	<div id="jk">
 	</div>
 </body>
 <style type="text/css">
 	#ls
 	{
-		height: 400px;
+		height: 600px;
 	}
 </style>
 <script type="text/javascript">
@@ -108,6 +109,12 @@ var vistakGraphObject = {
 		var polygon=document.createElementNS(NS,"polygon");
 		return polygon;
 	},
+	Circle : function()
+	{
+		var NS="http://www.w3.org/2000/svg";
+		var circle=document.createElementNS(NS,"circle");
+		return circle;
+	},
 	graphPolygonPoints : function(polygonPoints)
 	{
 		// var polygonPoints = [[200,10],[250,190],[160,210]];
@@ -132,6 +139,8 @@ var vistakGraphObject = {
 		element.appendChild(graphSVG);
 		self = this;
 
+
+
 		var getGraphPolygon = function() {
 			var graphPolygon = self.POLYGON();
 			graphSVG.appendChild(graphPolygon);
@@ -142,36 +151,65 @@ var vistakGraphObject = {
 			graphPolygonStyle.strokeWidth = "0.5";
 			return graphPolygon;
 		}
-
-		var setHorizontalLines = function(division) {
+		var getGraphPoint = function() {
+			var graphCircle = self.Circle();
+			graphSVG.appendChild(graphCircle);
+			return graphCircle;
+		}
+		var setGridLines = function(division) {
 			graphPolygon = new Array();
-			horizontalLineSpaceDivision = parseInt(self.bodyWidth/division);
-			for (var i = 0; i < self.bodyWidth; i+=horizontalLineSpaceDivision) {
-				graphPolygon[i] = getGraphPolygon();
-				graphArray = [[i,0],[i,self.bodyHeight]];
-				self.graphPolygonSetPoints(graphPolygon[i],graphArray);
-				graphPolygon[i].addEventListener("mouseover",function(){
-					horizontalLineStyle = this.style;
-					horizontalLineStyle.stroke = "rgb(100, 100, 100)";
-					horizontalLineStyle.strokeWidth = "5";
-				});
-				graphPolygon[i].addEventListener("mouseout",function(){
-					horizontalLineStyle = this.style;
-					horizontalLineStyle.stroke = "rgb(181, 175, 175)";
-					horizontalLineStyle.strokeWidth = "0.5";
-				});
+			horizontalSpaceDivision = parseInt(width/division);
+			verticalSpaceDivision = parseInt(height/division);
+
+			var pointArray = [];
+			var point = [];
+
+			var setPointArray = function() {
+				var p = 0;
+				for (var i = 0; i < width; i+=horizontalSpaceDivision) {
+					for (var j = 0; j < height; j+=verticalSpaceDivision) {
+						point[p] = getGraphPoint();
+						point[p].setAttribute("cx",""+""+i);
+						point[p].setAttribute("cy",""+""+j);
+						point[p].setAttribute("r","1");
+
+						
+						// console.log(point[p]);
+						point[p].addEventListener("mouseover",function(){
+							console.log(this.cx.baseVal.value);
+							console.log(this.cy.baseVal.value);
+							console.log(this.r);
+						});
+						p++;
+					}
+				}
 			}
-		}
-		var setVerticalLines = function(division) {
-			verticalLineSpaceDivision = parseInt(self.bodyHeight/division);
-			for (var i = 0; i < self.bodyWidth; i+=verticalLineSpaceDivision) {
-				graphPolygon = getGraphPolygon();
-				graphArray = [[0,i],[self.bodyWidth,i]];
-				self.graphPolygonSetPoints(graphPolygon,graphArray);
+
+
+			/** Initialization **/
+			var i = 0,k = 0,l = 0;
+			n = parseInt(width/horizontalSpaceDivision) + parseInt(height/verticalSpaceDivision);
+			while(i < n)
+			{
+				if(i < parseInt(width/horizontalSpaceDivision))
+				{
+					graphPolygon[i] = getGraphPolygon();
+					graphArray = [[k,0],[k,height]];
+					k += horizontalSpaceDivision;
+					self.graphPolygonSetPoints(graphPolygon[i],graphArray);
+				}
+				else
+				{
+					graphPolygon[i] = getGraphPolygon();
+					graphArray = [[0,l],[width,l]];
+					l += verticalSpaceDivision;
+					self.graphPolygonSetPoints(graphPolygon[i],graphArray);
+				}
+				i++;
 			}
+			setPointArray();
 		}
-		setHorizontalLines(20);
-		setVerticalLines(30);
+		setGridLines(10);
 	}
 };
 
