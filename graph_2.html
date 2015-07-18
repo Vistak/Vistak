@@ -163,6 +163,44 @@ var vistakGraphObject = {
 			graphPolygon = new Array();
 			horizontalSpaceDivision = parseInt(width/horizontalDivision);
 			verticalSpaceDivision = parseInt(height/verticalDivision);
+
+
+			var getPointSystem = function()
+			{
+				pointSystem = {
+					x:0,
+					y:0
+				};
+				return pointSystem;
+			}
+			var getNearestAll_4_Coordinates = function(ex,ey)
+			{
+				var x = parseInt(ex/horizontalSpaceDivision);
+				var y = parseInt(ey/verticalSpaceDivision);
+
+				ax = x*horizontalSpaceDivision;
+				bx = x*horizontalSpaceDivision+horizontalSpaceDivision;
+
+				ay = y*verticalSpaceDivision;
+				by = y*verticalSpaceDivision+verticalSpaceDivision;
+
+				a = getPointSystem();
+				a.x = ax; a.y = ay;
+				b = getPointSystem();
+				b.x = ax; b.y = by;
+				c = getPointSystem();
+				c.x = bx; c.y = ay;
+				d = getPointSystem();
+				d.x = bx; d.y = by;
+
+				nearestAll_4_Coordinates = {
+					a:a,
+					b:b,
+					c:c,
+					d:d
+				};
+				return nearestAll_4_Coordinates;
+			}
 			var getNearestCoordinate = function(a,b)
 			{
 				var x = parseInt(a/horizontalSpaceDivision);
@@ -207,14 +245,25 @@ var vistakGraphObject = {
 				}
 				return nearest;
 			}
-			var getPointSystem = function()
-			{
-				pointSystem = {
-					x:0,
-					y:0
-				};
-				return pointSystem;
-			};
+			/*
+			 * abcd represents nearestAll_4_Coordinates
+			 * prev_abcd represents abcd
+			 */
+			var prev_abcd;
+			var getPointerInsideBoxStatus = function(abcd) {
+				if (prev_abcd === undefined)
+				{
+					prev_abcd = abcd;
+					return 1;
+				}
+				else
+				{
+					pointerInsideBoxStatusx = ((abcd.a.x == prev_abcd.a.x)+0);
+					pointerInsideBoxStatusy = ((abcd.a.y == prev_abcd.a.y)+0);
+					prev_abcd = abcd;
+					return (pointerInsideBoxStatusx && pointerInsideBoxStatusy);
+				}
+			}
 
 			var pointArray = [];
 			var point = [];
@@ -240,10 +289,10 @@ var vistakGraphObject = {
 			var mousedownflag = false;
 			var userPolygonDrawStatus = 0;
 			var userDefinedPolygonPoints = [];
-			var previousNearest = {
-				x:0,
-				y:0
-			};
+			var userDefinedPolygonPoint;
+			var userGraphPolygon = getGraphPolygon();
+			var userGraphPolygonStyle = userGraphPolygon.style;
+			userGraphPolygonStyle.stroke = "rgb(0, 135, 172)";
 
 			graphSVG.onmousedown = function(event) {
 				mousedownflag = true;
@@ -255,12 +304,22 @@ var vistakGraphObject = {
 				if(mousedownflag)
 				{
 					nearest = getNearestCoordinate(event.x,event.y);
-					if(nearest.x != previousNearest.x || nearest.y != previousNearest.y)
+					nearestAll_4_Coordinates = getNearestAll_4_Coordinates(event.x,event.y);
+					pointerInsideBoxStatus = getPointerInsideBoxStatus(nearestAll_4_Coordinates);
+					if(pointerInsideBoxStatus == 0)
+					{
+						/*point = getGraphPoint(nearest.x,nearest.y,1);
+						console.log(nearest);*/
+						userDefinedPolygonPoint = [nearest.x,nearest.y];
+						userDefinedPolygonPoints.push(userDefinedPolygonPoint);
+						self.graphPolygonSetPoints(userGraphPolygon,userDefinedPolygonPoints);
+						console.log(userGraphPolygon);
+						// userPolygonDrawStatus++;
+					}
+					/*if(nearest.x != previousNearest.x || nearest.y != previousNearest.y)
 					{
 						console.log(userPolygonDrawStatus);
-						userPolygonDrawStatus++;
-					}
-					previousNearest = nearest;
+					}*/
 					// point = getGraphPoint(nearest.x,nearest.y,8);
 				}
 			}
