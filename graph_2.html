@@ -1,3 +1,10 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+</head>
 <body>
 	<div id="ls" style="background:lightblue">
 	</div>
@@ -11,369 +18,348 @@
 	}
 </style>
 <script type="text/javascript">
-var vistakGraphFunction = function()
-{
-	//Calculating Height and Width of Height
-	var bodyWidth = window.innerWidth|| document.documentElement.clientWidth|| document.body.clientWidth;
-	var bodyHeight = window.innerHeight|| document.documentElement.clientHeight|| document.body.clientHeight;
-
-	var SVG=function(h,w)
+	var vistakGraphFunction = function()
 	{
-		var NS="http://www.w3.org/2000/svg";
-		var svg=document.createElementNS(NS,"svg");
-		svg.setAttribute("height", h);
-		svg.setAttribute("width", w);
-		return svg;
-	}
+		//Calculating Height and Width of Height
+		var bodyWidth = window.innerWidth|| document.documentElement.clientWidth|| document.body.clientWidth;
+		var bodyHeight = window.innerHeight|| document.documentElement.clientHeight|| document.body.clientHeight;
 
-	var POLYGON = function()
-	{
-		var NS="http://www.w3.org/2000/svg";
-		var polygon=document.createElementNS(NS,"polygon");
-		return polygon;
-	}
-
-	var graphPolygonPoints = function(polygonPoints)
-	{
-		// var polygonPoints = [[200,10],[250,190],[160,210]];
-		var points = "";
-		for (var i = 0; i < polygonPoints.length; i++) 
+		var SVG=function(h,w)
 		{
-			points += polygonPoints[i]+" ";
-		}
-		return points;
-	}
-
-	var graphPolygonSetPoints = function(graphPolygon,polygonArray)
-	{
-
-		graphPolygon.setAttribute("points", graphPolygonPoints(polygonArray));
-	}
-
-	var createGraph = function(height,width)
-	{
-		// height =  bodyHeight;
-		// width  =  bodyWidth;
-
-		var graphSVG = new SVG(height,width);
-		document.body.appendChild(graphSVG);
-
-		var getGraphPolygon = function() {
-			var graphPolygon = new POLYGON();
-			graphSVG.appendChild(graphPolygon);
-			graphPolygon.setAttribute("points", "");
-			var graphPolygonStyle = graphPolygon.style;
-			/** Style Graph Polygon **/
-			graphPolygonStyle.stroke = "rgb(181, 175, 175)";
-			graphPolygonStyle.strokeWidth = "0.5";
-			return graphPolygon;
+			var NS="http://www.w3.org/2000/svg";
+			var svg=document.createElementNS(NS,"svg");
+			svg.setAttribute("height", h);
+			svg.setAttribute("width", w);
+			return svg;
 		}
 
-		var setHorizontalLines = function() {
-			for (var i = 0; i < bodyWidth; i+=20) {
-				graphPolygon = getGraphPolygon();
-				graphArray = [[i,0],[i,bodyHeight]];
-				graphPolygonSetPoints(graphPolygon,graphArray);
-			}
-		}
-		var setVerticalLines = function() {
-			for (var i = 0; i < bodyWidth; i+=20) {
-				graphPolygon = getGraphPolygon();
-				graphArray = [[0,i],[bodyWidth,i]];
-				graphPolygonSetPoints(graphPolygon,graphArray);
-			}
-		}
-		setHorizontalLines();
-		setVerticalLines();
-		
-		
-	}
-
-	createGraph(bodyHeight,bodyWidth);
-}
-
-var vistakGraphObject = {
-    bodyWidth: window.innerWidth|| document.documentElement.clientWidth|| document.body.clientWidth,
-    bodyHeight : window.innerHeight|| document.documentElement.clientHeight|| document.body.clientHeight,
-    SVG : function(h,w)
-	{
-		var NS="http://www.w3.org/2000/svg";
-		var svg=document.createElementNS(NS,"svg");
-		svg.setAttribute("height", h);
-		svg.setAttribute("width", w);
-		return svg;
-	},
-	POLYGON : function()
-	{
-		var NS="http://www.w3.org/2000/svg";
-		var polygon=document.createElementNS(NS,"polygon");
-		return polygon;
-	},
-	Circle : function()
-	{
-		var NS="http://www.w3.org/2000/svg";
-		var circle=document.createElementNS(NS,"circle");
-		return circle;
-	},
-	graphPolygonPoints : function(polygonPoints)
-	{
-		// var polygonPoints = [[200,10],[250,190],[160,210]];
-		var points = "";
-		for (var i = 0; i < polygonPoints.length; i++) 
+		var POLYGON = function()
 		{
-			points += polygonPoints[i]+" ";
+			var NS="http://www.w3.org/2000/svg";
+			var polygon=document.createElementNS(NS,"polygon");
+			return polygon;
 		}
-		return points;
-	},
-	graphPolygonSetPoints : function(graphPolygon,polygonArray)
-	{
-		graphPolygon.setAttribute("points", this.graphPolygonPoints(polygonArray));
-	},
-	createGraph : function(element)
-	{
-		height = (element.clientHeight === undefined) ? this.bodyHeight:element.clientHeight;
-		width = (element.clientWidth === undefined) ? this.bodyWidth:element.clientWidth;
 
-
-		var graphSVG = this.SVG(height,width);
-		element.appendChild(graphSVG);
-		self = this;
-
-
-
-		var getGraphPolygon = function() {
-			var graphPolygon = self.POLYGON();
-			graphSVG.appendChild(graphPolygon);
-			graphPolygon.setAttribute("points", "");
-			var graphPolygonStyle = graphPolygon.style;
-			/** Style Graph Polygon **/
-			graphPolygonStyle.stroke = "rgb(181, 175, 175)";
-			graphPolygonStyle.strokeWidth = "0.5";
-			return graphPolygon;
+		var graphPolygonPoints = function(polygonPoints)
+		{
+			// var polygonPoints = [[200,10],[250,190],[160,210]];
+			var points = "";
+			for (var i = 0; i < polygonPoints.length; i++) 
+			{
+				points += polygonPoints[i]+" ";
+			}
+			return points;
 		}
-		var getGraphPoint = function(x,y,r) {
-			var graphCircle = self.Circle();
-			graphSVG.appendChild(graphCircle);
-			graphCircle.setAttribute("cx",""+x);
-			graphCircle.setAttribute("cy",""+y);
-			graphCircle.setAttribute("r",""+r);
-			return graphCircle;
+
+		var graphPolygonSetPoints = function(graphPolygon,polygonArray)
+		{
+
+			graphPolygon.setAttribute("points", graphPolygonPoints(polygonArray));
 		}
-		var setGridLines = function(horizontalDivision,verticalDivision) {
-			graphPolygon = new Array();
-			horizontalSpaceDivision = parseInt(width/horizontalDivision);
-			verticalSpaceDivision = parseInt(height/verticalDivision);
 
+		var createGraph = function(height,width)
+		{
+			// height =  bodyHeight;
+			// width  =  bodyWidth;
 
-			var getPointSystem = function()
+			var graphSVG = new SVG(height,width);
+			document.body.appendChild(graphSVG);
+
+			var getGraphPolygon = function() {
+				var graphPolygon = new POLYGON();
+				graphSVG.appendChild(graphPolygon);
+				graphPolygon.setAttribute("points", "");
+				var graphPolygonStyle = graphPolygon.style;
+				/** Style Graph Polygon **/
+				graphPolygonStyle.stroke = "rgb(181, 175, 175)";
+				graphPolygonStyle.strokeWidth = "0.5";
+				return graphPolygon;
+			}
+
+			var setHorizontalLines = function() {
+				for (var i = 0; i < bodyWidth; i+=20) {
+					graphPolygon = getGraphPolygon();
+					graphArray = [[i,0],[i,bodyHeight]];
+					graphPolygonSetPoints(graphPolygon,graphArray);
+				}
+			}
+			var setVerticalLines = function() {
+				for (var i = 0; i < bodyWidth; i+=20) {
+					graphPolygon = getGraphPolygon();
+					graphArray = [[0,i],[bodyWidth,i]];
+					graphPolygonSetPoints(graphPolygon,graphArray);
+				}
+			}
+			setHorizontalLines();
+			setVerticalLines();
+			
+			
+		}
+
+		createGraph(bodyHeight,bodyWidth);
+	}
+
+	var vistakGraphObject = {
+	    bodyWidth: window.innerWidth|| document.documentElement.clientWidth|| document.body.clientWidth,
+	    bodyHeight : window.innerHeight|| document.documentElement.clientHeight|| document.body.clientHeight,
+	    SVG : function(h,w)
+		{
+			var NS="http://www.w3.org/2000/svg";
+			var svg=document.createElementNS(NS,"svg");
+			svg.setAttribute("height", h);
+			svg.setAttribute("width", w);
+			return svg;
+		},
+		POLYGON : function()
+		{
+			var NS="http://www.w3.org/2000/svg";
+			var polygon=document.createElementNS(NS,"polygon");
+			return polygon;
+		},
+		Circle : function()
+		{
+			var NS="http://www.w3.org/2000/svg";
+			var circle=document.createElementNS(NS,"circle");
+			return circle;
+		},
+		graphPolygonPoints : function(polygonPoints)
+		{
+			// var polygonPoints = [[200,10],[250,190],[160,210]];
+			var points = "";
+			for (var i = 0; i < polygonPoints.length; i++) 
 			{
-				pointSystem = {
-					x:0,
-					y:0
-				};
-				return pointSystem;
+				points += polygonPoints[i]+" ";
 			}
-			var getNearestAll_4_Coordinates = function(ex,ey)
-			{
-				var x = parseInt(ex/horizontalSpaceDivision);
-				var y = parseInt(ey/verticalSpaceDivision);
+			return points;
+		},
+		graphPolygonSetPoints : function(graphPolygon,polygonArray)
+		{
+			graphPolygon.setAttribute("points", this.graphPolygonPoints(polygonArray));
+		},
+		createGraph : function(element)
+		{
+			height = (element.clientHeight === undefined) ? this.bodyHeight:element.clientHeight;
+			width = (element.clientWidth === undefined) ? this.bodyWidth:element.clientWidth;
 
-				ax = x*horizontalSpaceDivision;
-				bx = x*horizontalSpaceDivision+horizontalSpaceDivision;
 
-				ay = y*verticalSpaceDivision;
-				by = y*verticalSpaceDivision+verticalSpaceDivision;
+			var graphSVG = this.SVG(height,width);
+			element.appendChild(graphSVG);
+			self = this;
 
-				a = getPointSystem();
-				a.x = ax; a.y = ay;
-				b = getPointSystem();
-				b.x = ax; b.y = by;
-				c = getPointSystem();
-				c.x = bx; c.y = ay;
-				d = getPointSystem();
-				d.x = bx; d.y = by;
 
-				nearestAll_4_Coordinates = {
-					a:a,
-					b:b,
-					c:c,
-					d:d
-				};
-				return nearestAll_4_Coordinates;
+
+			var getGraphPolygon = function() {
+				var graphPolygon = self.POLYGON();
+				graphSVG.appendChild(graphPolygon);
+				graphPolygon.setAttribute("points", "");
+				var graphPolygonStyle = graphPolygon.style;
+				/** Style Graph Polygon **/
+				graphPolygonStyle.stroke = "rgb(181, 175, 175)";
+				graphPolygonStyle.strokeWidth = "0.5";
+				return graphPolygon;
 			}
-			var getNearestCoordinate = function(a,b)
-			{
-				var x = parseInt(a/horizontalSpaceDivision);
-				var y = parseInt(b/verticalSpaceDivision);
-				ax = x*horizontalSpaceDivision;
-				bx = x*horizontalSpaceDivision+horizontalSpaceDivision;
-
-				ay = y*verticalSpaceDivision;
-				by = y*verticalSpaceDivision+verticalSpaceDivision;
-
-				var near_x_status = (bx-a < a-ax) ? 1 : 0 ;
-				var near_y_status = (by-b < b-ay) ? 1 : 0;
-				var nearest = {
-					x:0,
-					y:0
-				};
-				nearest.x = 0;
-				nearest.y = 0;
-
-				if(near_x_status && near_y_status)
-				{
-					nearest.x = bx;
-					nearest.y = by;
-				}
-
-				if(near_x_status && !near_y_status)
-				{
-					nearest.x = bx;
-					nearest.y = ay;
-				}
-
-				if(!near_x_status && near_y_status)
-				{
-					nearest.x = ax;
-					nearest.y = by;
-				}
-
-				if(!near_x_status && !near_y_status)
-				{
-					nearest.x = ax;
-					nearest.y = ay;
-				}
-				return nearest;
+			var getGraphPoint = function(x,y,r) {
+				var graphCircle = self.Circle();
+				graphSVG.appendChild(graphCircle);
+				graphCircle.setAttribute("cx",""+x);
+				graphCircle.setAttribute("cy",""+y);
+				graphCircle.setAttribute("r",""+r);
+				return graphCircle;
 			}
-			/*
-			 * abcd represents nearestAll_4_Coordinates
-			 * prev_abcd represents abcd
-			 */
-			var prev_abcd;
-			var getPointerInsideBoxStatus = function(abcd) {
-				if (prev_abcd === undefined)
+			var setGridLines = function(horizontalDivision,verticalDivision) {
+				graphPolygon = new Array();
+				horizontalSpaceDivision = parseInt(width/horizontalDivision);
+				verticalSpaceDivision = parseInt(height/verticalDivision);
+
+
+				var getPointSystem = function()
 				{
-					prev_abcd = abcd;
-					return 1;
+					pointSystem = {
+						x:0,
+						y:0
+					};
+					return pointSystem;
 				}
-				else
+				var getNearestAll_4_Coordinates = function(ex,ey)
 				{
-					pointerInsideBoxStatusx = ((abcd.a.x == prev_abcd.a.x)+0);
-					pointerInsideBoxStatusy = ((abcd.a.y == prev_abcd.a.y)+0);
-					prev_abcd = abcd;
-					return (pointerInsideBoxStatusx && pointerInsideBoxStatusy);
+					var x = parseInt(ex/horizontalSpaceDivision);
+					var y = parseInt(ey/verticalSpaceDivision);
+
+					ax = x*horizontalSpaceDivision;
+					bx = x*horizontalSpaceDivision+horizontalSpaceDivision;
+
+					ay = y*verticalSpaceDivision;
+					by = y*verticalSpaceDivision+verticalSpaceDivision;
+
+					a = getPointSystem();
+					a.x = ax; a.y = ay;
+					b = getPointSystem();
+					b.x = ax; b.y = by;
+					c = getPointSystem();
+					c.x = bx; c.y = ay;
+					d = getPointSystem();
+					d.x = bx; d.y = by;
+
+					nearestAll_4_Coordinates = {
+						a:a,
+						b:b,
+						c:c,
+						d:d
+					};
+					return nearestAll_4_Coordinates;
 				}
-			}
+				var getNearestCoordinate = function(a,b)
+				{
+					var x = parseInt(a/horizontalSpaceDivision);
+					var y = parseInt(b/verticalSpaceDivision);
+					ax = x*horizontalSpaceDivision;
+					bx = x*horizontalSpaceDivision+horizontalSpaceDivision;
 
-			var pointArray = [];
-			var point = [];
+					ay = y*verticalSpaceDivision;
+					by = y*verticalSpaceDivision+verticalSpaceDivision;
 
-			//** Create Graph **//
-			var p = 0, n = 0;
-			for (var i = 0; i < width; i+=horizontalSpaceDivision) {
+					var near_x_status = (bx-a < a-ax) ? 1 : 0 ;
+					var near_y_status = (by-b < b-ay) ? 1 : 0;
+					var nearest = {
+						x:0,
+						y:0
+					};
+					nearest.x = 0;
+					nearest.y = 0;
 
-				graphPolygon[n] = getGraphPolygon();
-				graphArrayHorizontal = [[i,0],[i,height]];
-				self.graphPolygonSetPoints(graphPolygon[n],graphArrayHorizontal);
+					if(near_x_status && near_y_status)
+					{
+						nearest.x = bx;
+						nearest.y = by;
+					}
 
-				for (var j = 0; j < height; j+=verticalSpaceDivision) {
+					if(near_x_status && !near_y_status)
+					{
+						nearest.x = bx;
+						nearest.y = ay;
+					}
+
+					if(!near_x_status && near_y_status)
+					{
+						nearest.x = ax;
+						nearest.y = by;
+					}
+
+					if(!near_x_status && !near_y_status)
+					{
+						nearest.x = ax;
+						nearest.y = ay;
+					}
+					return nearest;
+				}
+				/*
+				 * abcd represents nearestAll_4_Coordinates
+				 * prev_abcd represents abcd
+				 */
+				var prev_abcd;
+				var getPointerInsideBoxStatus = function(abcd) {
+					if (prev_abcd === undefined)
+					{
+						prev_abcd = abcd;
+						return 1;
+					}
+					else
+					{
+						pointerInsideBoxStatusx = ((abcd.a.x == prev_abcd.a.x)+0);
+						pointerInsideBoxStatusy = ((abcd.a.y == prev_abcd.a.y)+0);
+						prev_abcd = abcd;
+						return (pointerInsideBoxStatusx && pointerInsideBoxStatusy);
+					}
+				}
+
+				var pointArray = [];
+				var point = [];
+
+				//** Create Graph **//
+				var p = 0, n = 0;
+				for (var i = 0; i < width; i+=horizontalSpaceDivision) {
 
 					graphPolygon[n] = getGraphPolygon();
-					graphArrayVertical = [[0,j],[width,j]];
-					self.graphPolygonSetPoints(graphPolygon[n],graphArrayVertical);
+					graphArrayHorizontal = [[i,0],[i,height]];
+					self.graphPolygonSetPoints(graphPolygon[n],graphArrayHorizontal);
+
+					for (var j = 0; j < height; j+=verticalSpaceDivision) {
+
+						graphPolygon[n] = getGraphPolygon();
+						graphArrayVertical = [[0,j],[width,j]];
+						self.graphPolygonSetPoints(graphPolygon[n],graphArrayVertical);
+						n++;
+					}
 					n++;
 				}
-				n++;
-			}
 
-			var mousedownflag = false;
-			var userPolygonDrawStatus = 0;
-			var userDefinedPolygonPoints = [];
-			var userDefinedPolygonPoint;
-			var userGraphPolygon = getGraphPolygon();
-			var userGraphPolygonStyle = userGraphPolygon.style;
-			userGraphPolygonStyle.stroke = "rgb(0, 135, 172)";
+				var mousedownflag = false;
+				var userPolygonDrawStatus = 1;
+				var userDefinedPolygonPoints = [];
+				var userDefinedPolygonPoint;
+				var userGraphPolygon = getGraphPolygon();
+				var userGraphPolygonStyle = userGraphPolygon.style;
+				var previousEventValues = getPointSystem();
+				userGraphPolygonStyle.stroke = "rgb(0, 135, 172)";
+				userGraphPolygonStyle.fill = "none";
 
-			graphSVG.onmousedown = function(event) {
-				mousedownflag = true;
-			}
-			graphSVG.onmouseup = function(event) {
-				mousedownflag = false;
-			}
-			graphSVG.onmousemove = function(event) {
-				if(mousedownflag)
-				{
-					nearest = getNearestCoordinate(event.x,event.y);
-					nearestAll_4_Coordinates = getNearestAll_4_Coordinates(event.x,event.y);
+				var pointerInsideBoxStatus = 0;
+
+				var pencilIndependentdraw = function(eventValues) {
+					nearestAll_4_Coordinates = getNearestAll_4_Coordinates(eventValues.x,eventValues.y);
 					pointerInsideBoxStatus = getPointerInsideBoxStatus(nearestAll_4_Coordinates);
-					if(pointerInsideBoxStatus == 0)
-					{
-						/*point = getGraphPoint(nearest.x,nearest.y,1);
-						console.log(nearest);*/
-						userDefinedPolygonPoint = [nearest.x,nearest.y];
-						userDefinedPolygonPoints.push(userDefinedPolygonPoint);
+
+					// console.log(pointerInsideBoxStatus);
+					if(pointerInsideBoxStatus)
+					{	
+						// userDefinedPolygonPoints.push([eventValues.x,eventValues.y]);
+						console.log(userDefinedPolygonPoints);
+						userDefinedPolygonPoints[userPolygonDrawStatus]=[eventValues.x,eventValues.y];
+						previousEventValues.x = eventValues.x;
+						previousEventValues.y = eventValues.y;
 						self.graphPolygonSetPoints(userGraphPolygon,userDefinedPolygonPoints);
-						console.log(userGraphPolygon);
-						// userPolygonDrawStatus++;
+						// userPolygonDrawStatus = 0;
 					}
-					/*if(nearest.x != previousNearest.x || nearest.y != previousNearest.y)
+					else
 					{
-						console.log(userPolygonDrawStatus);
-					}*/
-					// point = getGraphPoint(nearest.x,nearest.y,8);
+						/*if(userDefinedPolygonPoints.length > 2)
+							userDefinedPolygonPoints.pop();*/
+						nearest = getNearestCoordinate(eventValues.x,eventValues.y);
+						userDefinedPolygonPoints[userPolygonDrawStatus] = [nearest.x,nearest.y];
+						userPolygonDrawStatus++;
+					}
+						
+				}
+
+				graphSVG.onmousedown = function(event) {
+					mousedownflag = true;
+					nearest = getNearestCoordinate(event.x,event.y);
+					userDefinedPolygonPoints.push([nearest.x,nearest.y]);
+					pencilIndependentdraw(event);
+				}
+				graphSVG.onmouseup = function(event) {
+					nearest = getNearestCoordinate(event.x,event.y);
+					userDefinedPolygonPoints[userPolygonDrawStatus] = [nearest.x,nearest.y];
+					console.log(userDefinedPolygonPoints);
+					mousedownflag = false;
+				}
+				graphSVG.onmousemove = function(event) {
+					if(mousedownflag)
+					{
+						pencilIndependentdraw(event);
+					}
 				}
 			}
+			setGridLines(10,10);
+
+			// graphSVG.zoomAndPan = 8;
+			console.log(graphSVG.parentNode.children);
+			// console.log(document.children[0].children[1].children);
+			// console.log(document.children[0].children[1].children[0].children);
 		}
-		setGridLines(10,10);
+	};
 
-		// graphSVG.zoomAndPan = 8;
-		console.log(graphSVG.parentNode.children);
-		// console.log(document.children[0].children[1].children);
-		// console.log(document.children[0].children[1].children[0].children);
-	}
-};
-
-var ls = document.getElementById("ls");
-vistakGraphObject.createGraph(ls);
-// var graph1 = new vistakGraph();
-// vistakGraphObject.createGraph(vistakGraphObject.bodyHeight,vistakGraphObject.bodyWidth);
-// console.log(vistakGraph1);
-	//Setting Attributes of graphSVG style="fill:lime;stroke:purple;stroke-width:1"
-	/*graphSVG.setAttribute("height", "210");
-	graphSVG.setAttribute("width", "500");
-
-	graphSVG.appendChild(graphPolygon);
-	graphPolygon.setAttribute("points", "200,10 250,190 160,210");
-	graphPolygon.setAttribute("style", "fill:lime;stroke:purple;stroke-width:1");
-
-
-	document.body.appendChild(graphSVG);
-	/*graphPolygonStyle = graphPolygon.style;
-	graphPolygonStyle.fill = "lime";
-	graphPolygonStyle.stroke = "purple";
-	graphPolygonStyle.strokeWidth = "1";*/
-
-	/*var SVG=function(h,w)
-	{
-		var NS="http://www.w3.org/2000/svg";
-		var svg=document.createElementNS(NS,"svg");
-		svg.width=w;
-		svg.height=h;
-		return svg;
-	}
-	var svg=SVG(200,500);
-	document.body.appendChild(svg);
-	var rect=function(h,w,fill)
-	{
-		var NS="http://www.w3.org/2000/svg";
-		var SVGObj= document.createElementNS(NS,"rect");
-		SVGObj.width.baseVal.value=w;
-		SVGObj.height.baseVal.value=h;
-		SVGObj.setAttribute("height",h);
-		SVGObj.style.fill=fill;
-		return SVGObj;
-	}
-	var r= rect(100,100,"blue");
-	svg.appendChild(r);*/
-
+	var ls = document.getElementById("ls");
+	vistakGraphObject.createGraph(ls);
 </script>
+</html>

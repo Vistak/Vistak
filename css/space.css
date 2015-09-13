@@ -1,0 +1,10 @@
+body{
+	/*overflow: hidden;*/
+}
+.celestialbodies{
+	z-index: -100000;
+	background:black;
+	margin-left: -10px;
+	margin-top: -10px;
+	position: fixed;
+}

@@ -1,0 +1,35 @@
+.item{
+	height: 500px;
+}
+.back, .next{
+	border-radius: 30px;
+	width: 15%;
+	height: 60px;
+}
+.back{
+	margin-left: 5%;
+}
+.next{
+	float:right;
+	margin-right: 5%;
+}
+body{
+	background: url(../../images/wallspace.jpg) no-repeat fixed;
+	background-size: cover;
+}
+.afterbigheader{
+	background: white;
+	min-height: 700px;
+	padding-top: 20px;
+}
+.vistak-fixed-header{
+	position: fixed;
+	z-index: 1000;
+}
+.vistak-fixed-header img{
+	height: 50px;
+	width: 130px;
+}
+.row .bigheader img{
+	padding: 200px;
+}
