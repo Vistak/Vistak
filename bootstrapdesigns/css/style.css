@@ -16,6 +16,7 @@
 body{
 	background: url(../../images/wallspace.jpg) no-repeat fixed;
 	background-size: cover;
+	background-position: 0px -100px;
 }
 .afterbigheader{
 	background: white;
@@ -25,11 +26,145 @@ body{
 .vistak-fixed-header{
 	position: fixed;
 	z-index: 1000;
+	width: 100%;
 }
-.vistak-fixed-header img{
-	height: 50px;
-	width: 130px;
+#header-fixed-left{
+	font-family: 'Orbitron', cursive;
+	color: white;
+	font-size: 40px;
+	margin-left: 2%;
+}
+.vistak-fixed-header .logo{
+	height: 20px;
+	width: 20px;
+	margin-top: -28px;
 }
 .row .bigheader img{
 	padding: 200px;
+}
+.bigheader{
+	color: white;
+	padding-top: 5%;
+}
+.bigheader h1{
+	font-weight: bold;
+	font-size: 100px;
+	font-family: 'Orbitron';
+	background: rgba(0, 0, 0, 0.49);
+	width: 60%;
+	margin-left: 20%;
+	border-radius: 0px 0px 0px 62px;
+}
+.bigheader p{
+	font-size: 30px;
+	color: rgb(7, 250, 28);
+	font-weight: bold;
+	font-family: 'PoiretOne';
+	background: rgba(0, 0, 0, 0.49);
+}
+.scroll-buttons{
+	font-size: 30px;
+	color: rgb(14, 231, 249);
+	font-weight: bold;
+	font-family: 'Pacifico';
+	border-radius: 252px;
+	/*float: left;
+	margin-left: 2%;*/
+}
+.scroll-buttons:focus,.scroll-buttons:hover{
+    text-decoration: none;
+}
+#introduction-button{
+	background: rgba(255, 0, 0, 0.53);
+	padding: 58px 10px 58px 10px;
+	margin-right: 30px;
+}
+#about-button{
+	background: rgba(0, 128, 0, 0.51);
+	padding: 58px 50px 58px 42px;
+}
+#contact-button{
+	background: rgba(32, 41, 128, 0.51);
+	padding: 50px 30px 50px 30px;
+}
+.container-fluid .jumbotron, .thumbnail {
+	border-radius: 0px;
+	background: rgba(0, 255, 23, 0.39);
+}
+.thumbnail > .caption > h3, .jumbotron h2{
+	font-family: "Neometric";
+	font-weight: bold;
+}
+.thumbnail > .caption > p, .jumbotron p{
+	text-align: justify;
+	font-family: "Raleway";
+	font-weight: bold;
+}
+.jumbotron a,.thumbnail a{
+	border-radius: 0px;
+}
+#introduction h2{
+	color: rgb(37, 69, 31);
+}
+
+/** Install fonts **/
+@font-face {
+  font-family: 'Orbitron';
+  font-style: normal;
+  src: url(../fonts/Orbitron-Regular.ttf);
+}
+@font-face {
+  font-family: 'Pacifico';
+  font-style: normal;
+  src:url(../fonts/Pacifico.ttf);
+}
+@font-face {
+  font-family: 'PoiretOne';
+  font-style: normal;
+  src:url(../fonts/PoiretOne-Regular.ttf);
+}
+@font-face {
+  font-family: 'Raleway';
+  font-style: normal;
+  src:url(../fonts/Raleway-Regular.ttf);
+}
+@font-face {
+  font-family: 'Sofia';
+  font-style: normal;
+  src:url(../fonts/Sofia-Regular.otf);
+}
+@font-face {
+  font-family: 'Sansation';
+  font-style: normal;
+  src:url(../fonts/Sansation-Regular.ttf);
+}
+@font-face {
+  font-family: 'SansationBold';
+  font-style: normal;
+  src:url(../fonts/Sansation-Bold.ttf);
+}
+@font-face {
+  font-family: 'sansation_light';
+  font-style: normal;
+  src: local('sansation_light'), local('sansation_light'), url(../fonts/sansation_light.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'PassionOne';
+  font-style: normal;
+  src: local('PassionOne'), local('PassionOne'), url(../fonts/PassionOne.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Neometric';
+  font-style: normal;
+  src: url(../fonts/Neometric-Medium.otf);
+}
+Neometric-Medium
+/** Media Queries **/
+@media screen and (max-width: 900px) {
+    body {
+        background-size: 1400px;
+    }
+    .bigheader h1 {
+	    width: 70%;
+	}
 }

@@ -8,3 +8,13 @@ body{
 	margin-top: -10px;
 	position: fixed;
 }
+.celestialbodies div{
+	z-index: -1000000;
+}
+#myName{
+	background: rgba(168, 106, 106, 0.52);
+	color: rgb(232, 219, 219);
+	font-size: 92px;
+	padding: 5%;
+	transform: translateY(244px);
+}
