@@ -71,8 +71,12 @@ body{
 	/*float: left;
 	margin-left: 2%;*/
 }
+.scroll-buttons:visited{
+	color: rgb(14, 231, 249);
+}
 .scroll-buttons:focus,.scroll-buttons:hover{
     text-decoration: none;
+    color: white;
 }
 #introduction-button{
 	background: rgba(255, 0, 0, 0.53);
@@ -158,7 +162,6 @@ body{
   font-style: normal;
   src: url(../fonts/Neometric-Medium.otf);
 }
-Neometric-Medium
 /** Media Queries **/
 @media screen and (max-width: 900px) {
     body {
@@ -167,4 +170,19 @@ Neometric-Medium
     .bigheader h1 {
 	    width: 70%;
 	}
+}
+
+/* Scroll Bars */
+body::-webkit-scrollbar {
+    width: 1em;
+}
+ 
+body::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+}
+ 
+body::-webkit-scrollbar-thumb {
+  background-color: rgb(102, 103, 150);
+  border-radius: 20px;
+  outline: 1px solid slategrey;
 }
